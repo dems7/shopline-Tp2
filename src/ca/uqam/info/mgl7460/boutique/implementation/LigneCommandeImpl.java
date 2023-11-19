@@ -39,4 +39,16 @@ public class LigneCommandeImpl implements LigneCommande {
     public void setPrixUnitaire(float prix) {
         this.prixUnitaire = prix;
     }
+/* 
+    @Override
+    public int incrementerQuantite() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'incrementerQuantite'");
+    }
+
+    @Override
+    public int decrementerQuantite() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'decrementerQuantite'");
+    }*/
 }

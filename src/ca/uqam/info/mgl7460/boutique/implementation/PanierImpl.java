@@ -4,6 +4,7 @@ import java.util.*;
 
 import ca.uqam.info.mgl7460.boutique.domain.Client;
 import ca.uqam.info.mgl7460.boutique.domain.Commande;
+import ca.uqam.info.mgl7460.boutique.domain.FabriqueBoutique;
 import ca.uqam.info.mgl7460.boutique.domain.LigneCommande;
 import ca.uqam.info.mgl7460.boutique.domain.Panier;
 import ca.uqam.info.mgl7460.boutique.domain.Produit;
@@ -54,27 +55,30 @@ public class PanierImpl implements Panier {
     }
 
     @Override
-    public int incrementerQuantiteProduit(Produit prod) {
+        public int incrementerQuantiteProduit(Produit prod) {
         if (lignesCommande.containsKey(prod)) {
             LigneCommande ligne = lignesCommande.get(prod);
-            int nouvelleQuantite = ligne.incrementerQuantite();
-            return nouvelleQuantite;
+            ligne.modifierQuantite(ligne.getQuantite() + 1);
+            return ligne.getQuantite();
         }
         return -1;
     }
 
     @Override
     public int decrementerQuantiteProduit(Produit prod) {
-        if (lignesCommande.containsKey(prod)) {
-            LigneCommande ligne = lignesCommande.get(prod);
-            int nouvelleQuantite = ligne.decrementerQuantite();
-            if (nouvelleQuantite == 0) {
-                lignesCommande.remove(prod);
-            }
+    if (lignesCommande.containsKey(prod)) {
+        LigneCommande ligne = lignesCommande.get(prod);
+        int nouvelleQuantite = ligne.getQuantite() - 1;
+        if (nouvelleQuantite > 0) {
+            ligne.modifierQuantite(nouvelleQuantite);
             return nouvelleQuantite;
+        } else {
+            lignesCommande.remove(prod);
+            return 0;
         }
-        return -1;
     }
+    return -1;
+}
 
     @Override
     public int getQuantiteProduit(Produit prod) {
@@ -90,9 +94,19 @@ public class PanierImpl implements Panier {
         return valeurPanier;
     }
 
-    @Override
+    /*@Override
     public Commande creerCommande() {
         Commande commande = client.creerCommande();
+        for (LigneCommande ligne : lignesCommande.values()) {
+            commande.ajouteLigneCommande(ligne.getProduit(), ligne.getQuantite());
+        }
+        return commande;
+    }*/
+
+    @Override
+    public Commande creerCommande() {
+        FabriqueBoutique fabrique = new FabriqueBoutiqueImpl();
+        Commande commande = fabrique.creerCommande(client);
         for (LigneCommande ligne : lignesCommande.values()) {
             commande.ajouteLigneCommande(ligne.getProduit(), ligne.getQuantite());
         }

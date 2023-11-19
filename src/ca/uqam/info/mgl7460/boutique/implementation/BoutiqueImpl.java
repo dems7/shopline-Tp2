@@ -1,6 +1,6 @@
 package ca.uqam.info.mgl7460.boutique.implementation;
 
-import ca.uqam.info.mgl7460.boutique.domain.Adresse;
+//import ca.uqam.info.mgl7460.boutique.domain.Adresse;
 import ca.uqam.info.mgl7460.boutique.domain.Boutique;
 import ca.uqam.info.mgl7460.boutique.domain.Client;
 import ca.uqam.info.mgl7460.boutique.domain.Commande;
@@ -36,10 +36,12 @@ public class BoutiqueImpl implements Boutique {
     public Client inscrireClient(String prenom, String nom, Salutation salutation,
                                  String numeroPorte, String numeroRue, String nomRue,
                                  String ville, String codePostal, Province province) {
-        FabriqueBoutique fabrique = getFabriqueBoutique();
-        Adresse adresse = fabrique.creerAdresse(numeroPorte, numeroRue, nomRue, ville, codePostal, province);
-        return fabrique.creerClient(prenom, nom, salutation, adresse);
+        //FabriqueBoutique fabrique = getFabriqueBoutique();
+        //Adresse adresse = fabrique.creerAdresse(numeroPorte, numeroRue, nomRue, ville, codePostal, province);
+        //return fabrique.creerClient(prenom, nom, salutation, adresse);
+        return new ClientImpl(prenom, nom, salutation, codePostal, codePostal, codePostal, codePostal, codePostal, province);
     }
+    
 
     @Override
     public Panier demarrerSessionClient(Client client) {

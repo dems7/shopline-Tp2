@@ -87,7 +87,7 @@ public interface Panier {
      * réciproquement.
      * @return
      */
-    public Commande creerCommande();
+    public Commande creerCommande(); 
 
     /**
      * ré-initialiser le panier à un panier vide

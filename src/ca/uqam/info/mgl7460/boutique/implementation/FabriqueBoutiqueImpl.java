@@ -1,6 +1,7 @@
 package ca.uqam.info.mgl7460.boutique.implementation;
 
 import ca.uqam.info.mgl7460.boutique.domain.Adresse;
+//import ca.uqam.info.mgl7460.boutique.domain.Boutique;
 import ca.uqam.info.mgl7460.boutique.domain.Client;
 import ca.uqam.info.mgl7460.boutique.domain.Commande;
 import ca.uqam.info.mgl7460.boutique.domain.FabriqueBoutique;
@@ -12,21 +13,22 @@ import ca.uqam.info.mgl7460.boutique.domain.Livraison;
 import ca.uqam.info.mgl7460.boutique.domain.Paiement;
 import ca.uqam.info.mgl7460.boutique.domain.Panier;
 import ca.uqam.info.mgl7460.boutique.domain.Produit;
+//import ca.uqam.info.mgl7460.boutique.domain.Province;
 import ca.uqam.info.mgl7460.boutique.domain.Salutation;
 import netscape.javascript.JSObject;
 
 public class FabriqueBoutiqueImpl implements FabriqueBoutique {
 
     @Override
-    public Client creerClient(String prenom, String nom, Salutation salutation, Adresse adresse) {
-        return new ClientImpl(prenom, nom, salutation, adresse);
+    public Client creerClient(String prenom, String nom, Salutation salutation) {
+        return new ClientImpl(prenom, nom, salutation);
     }
 
     @Override
     public Adresse creerAdresse(JSObject jsonObject) {
-        // Implémentez la logique de création d'adresse à partir du JSON
-        return null;
-    }
+        // logique de création d'adresse à partir du JSON
+        return new Adresse(null, null, null, null, null, null); 
+    } 
 
     @Override
     public Panier creerPanierPourClient(Client client) {
@@ -60,7 +62,7 @@ public class FabriqueBoutiqueImpl implements FabriqueBoutique {
 
     @Override
     public ItemInventaire creerItemInventaire(Produit produit, String numeroInventaire) throws InventaireEpuise {
-        return new ItemInventaireImpl(produit, numeroInventaire);
+        return new ItemInventaireImpl(produit, numeroInventaire, null);
     }
 
     @Override
@@ -68,9 +70,4 @@ public class FabriqueBoutiqueImpl implements FabriqueBoutique {
         return new LigneCommandeImpl(produit, quantite);
     }
 
-    @Override
-    public Client creerClient(String prenom, String nom, Salutation sal) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'creerClient'");
-    }
 }

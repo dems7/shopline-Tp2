@@ -42,6 +42,7 @@ public interface Client {
     /**
      * ajoute une commande à la liste de commande du client
      * @param commande
+     * @return 
      */
     public void ajouterCommande(Commande commande);
 
@@ -80,5 +81,7 @@ public interface Client {
      * @return
      */
     public Iterator<Paiement> getPaiementsPourCommande(Commande commande);
+
+   
 
 }
